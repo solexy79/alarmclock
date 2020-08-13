@@ -21,8 +21,8 @@
   --transition: all .5s linear;
   --radius: 0.5rem;
   --dark-neu-shadow:
-  -4px -4px 12px 0 rgba(155, 156, 157, .05),
-    10px 10px 12px 0 rgba(0, 0, 0, 0.50);
+  -4px -4px 12px 0 rgba(155, 156, 157, 0.2),
+    10px 10px 15px 0 rgba(0, 0, 0, 0.50);
 }
 
 
@@ -161,6 +161,7 @@ section.alarms-section label{
 .icon-control i{
   padding: .5rem; 
   font-size: .9rem;
+  color: var(--very-light-grey);
 }
 
 /* toggle button */
