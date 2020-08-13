@@ -27,6 +27,7 @@
 
 
 body{
+  height: 100%;
   font-family: var(--ff-secondary);
 }
 
@@ -114,6 +115,7 @@ section.alarms-section label{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 1rem 0
 }
 
 .alarms .alarm-time{
@@ -128,7 +130,7 @@ section.alarms-section label{
   align-items: center;
   justify-content: flex-start;
   border-radius: var(--radius);
-  margin: 2rem 0;
+  margin: 3rem 0;
   padding: .8rem;
   box-shadow: var(--dark-neu-shadow)
 }
