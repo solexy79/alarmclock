@@ -7,7 +7,7 @@
 }
 
 :root {
-  --clr-primary-1: rgb(12, 13, 15);
+  --clr-primary-1: rgb(22, 24, 27);
   --accent-clr-1: rgba(172, 0, 0, 1);
   --accent-clr-2: rgba(49, 154, 76, 1);
   /* different shades of grey */
@@ -21,7 +21,7 @@
   --transition: all .5s linear;
   --radius: 0.5rem;
   --dark-neu-shadow:
-  -4px -4px 12px 0 rgba(155, 156, 157, 0.2),
+  -4px -4px 12px 0 rgba(155, 156, 157, 0.1),
     10px 10px 15px 0 rgba(0, 0, 0, 0.50);
 }
 
@@ -146,9 +146,9 @@ section.alarms-section label{
 }
 
 .icon-control{
-  margin: 1rem auto;
-  width: 2.5rem;
-  height: 2.5rem;
+  margin: 1rem auto 0;
+  width: 3rem;
+  height: 3rem;
   background: var(--clr-primary-1);
   box-shadow: var(--dark-neu-shadow);
   border-radius: var(--radius) ;
