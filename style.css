@@ -1,0 +1,202 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+:root {
+  --clr-primary-1: rgb(12, 13, 15);
+  --accent-clr-1: rgba(172, 0, 0, 1);
+  --accent-clr-2: rgba(49, 154, 76, 1);
+  /* different shades of grey */
+  --dark-grey:rgba(89, 91, 93, 1);
+  --light-grey: rgba(155, 156, 157, 1);
+  --very-light-grey: rgba(207, 209, 209, 1);
+  /* last i think shadow color */
+  --neu-shadow:  rgba(52, 54, 34, 1) ;
+  --ff-primary: "Roboto", sans-serif;
+  --ff-secondary: "Montserrat", sans-serif;
+  --transition: all .5s linear;
+  --radius: 0.5rem;
+  --dark-neu-shadow:
+  -4px -4px 12px 0 rgba(155, 156, 157, .05),
+    10px 10px 12px 0 rgba(0, 0, 0, 0.50);
+}
+
+
+body{
+  font-family: var(--ff-secondary);
+}
+
+main{
+  background:  var(--clr-primary-1);
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* nav{
+
+} */
+
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-around; 
+  padding: 1rem;
+}
+
+.header a{
+  color: #fff;
+  font-weight: 700;
+  font-size:1.2rem;
+}
+
+
+/* digital clock */
+section.digital-clock{
+  width: 12rem;
+  height: 12rem;
+  background: var(--clr-primary-1);
+  box-shadow: var(--dark-neu-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: 3rem auto;
+  border-radius: 50%;
+}
+
+.date{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  color: var(--very-light-grey);
+}
+
+.day{
+  font-size: .8rem;
+  padding: .5rem 0;
+  color: var(--light-grey);
+}
+
+.month{
+  font-size: .85rem;
+}
+
+.time{
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--very-light-grey);
+}
+
+.alarm-prompt i {
+  color: var(--accent-clr-1);
+}
+
+.second{
+  font-size: 1rem;
+}
+
+section.alarms-section{
+  padding: 1.5rem;
+}
+
+section.alarms-section label{
+  font-weight: 600;
+  color: var(--very-light-grey);
+}
+
+.alarms{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.alarms .alarm-time{
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--dark-grey)
+}
+
+.add-alarm,
+.add-timer{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: var(--radius);
+  margin: 2rem 0;
+  padding: .8rem;
+  box-shadow: var(--dark-neu-shadow)
+}
+
+.add-alarm i,.add-timer i{
+  padding: 0 1rem;
+  font-size: .9rem;
+  color:var(--very-light-grey);
+}
+
+.add-alarm p,.add-timer p{
+  font-size: .8rem;
+  font-weight: 500;
+  color:var(--very-light-grey);
+}
+
+.icon-control{
+  margin: 1rem auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--clr-primary-1);
+  box-shadow: var(--dark-neu-shadow);
+  border-radius: var(--radius) ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.icon-control i{
+  padding: .5rem; 
+  font-size: .9rem;
+}
+
+/* toggle button */
+input[type = 'checkbox'].toggle-button{
+  position: relative;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none; 
+  width: 3.5rem;
+  height: 1.875rem;
+  background: var(--clr-primary-1); 
+  outline: none;
+  border-radius: 20px;
+  box-shadow: inset 1px 1px 5px 0 rgba(0, 0, 0, .8), inset -1px -1px 2px 0 var(--dark-grey);
+  transition: var(--transition);
+
+}
+input:checked[type="checkbox"].toggle-button {
+  background: var(--clr-primary-1);
+}
+
+input[type="checkbox"].toggle-button::before{
+  content: '';
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--accent-clr-1);
+  box-shadow: inset 0 -10px 10px 0 var(--accent-clr-1);
+  position: absolute;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: var(--transition);
+}
+  
+input:checked[type="checkbox"].toggle-button::before{
+left: 28px;
+background-color: var(--accent-clr-2);
+box-shadow: 0 1px 5px 0 var(--accent-clr-2);
+} 
