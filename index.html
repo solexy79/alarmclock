@@ -1,54 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
-  <title>Alarm Clock</title>
-</head>
-<body>
-  <main>
-    <nav >
-      <ul  class="header">
-        <li><a href="#">Timer</a></li>
-        <li><a href="index.html" class="active">Alarm Clock</a></li>
-      </ul>
-    </nav>
-    <section class="digital-clock">
-      <div class="date">
-        <span class="day">Sunday</span>
-        <span class="month">Sept 24, 2020</span>
-      </div>
-      <div class="time">
-        <span class="hour">08:</span>
-        <span class="minute">30</span>
-        <!-- <span class="second">59</span> -->
-      </div>
-      <div class="alarm-prompt"><i class="fas fa-clock"></i></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Alarm Clock</title>
+  </head>
+  <body>
+    <main>
+      <nav>
+        <ul class="header">
+          <li><a href="index.html" class="active">Alarm Clock</a></li>
+          <li><a href="#">Timer</a></li>
+        </ul>
+      </nav>
+      <section class="analog-clock">
+        <div class="clock-hand second" data-second-hand></div>
+        <div class="clock-hand minute" data-minute-hand></div>
+        <div class="digital-clock">
+          <span class="time" data-digital-clock>08:30</span>
+        </div>
+      </section>
 
-    </section>
+      <section class="alarms-section">
+        <label for="">Alarms</label>
+        <div class="alarms">
+          <div class="alarm-time">
+            <label for="toggle">09:30</label>
+            <span class="desc">Exercise</span>
+          </div>
+          <input type="checkbox" class="toggle-button" checked id="toggle" />
+        </div>
+        <button class="openModal" data-open-modal>
+          <i class="fas fa-plus"></i>
+        </button>
+      </section>
+      <section></section>
+    </main>
+    <aside id="modal" aria-hidden="true" role="dialog">
+      <div class="modalContent">
+        <button id="closeModal" type="button">&times;</button>
+        <label for="description"
+          >Write a <strong>brief</strong> description</label
+        >
+        <input type="text" class="" id="description" />
+        <label for="set-alarm">Set Alarm</label>
+        <input type="datetime-local" class="" id="set-alarm" />
+        <button class="alarm-btn">Alarm me!</button>
+      </div>
+    </aside>
 
-    <section class="alarms-section">
-      <label for="">Alarms</label>
-      <div class="alarms">
-        <div class="alarm-time">09:30</div>
-        <input type="checkbox" class="toggle-button" checked>
-      </div>
-      <div class="add-alarm">
-        <i class="fas fa-plus"></i>
-        <p>Add Alarm</p>
-      </div>
-      <div class="add-timer">
-        <i class="fas fa-plus"></i>
-        <p>Add Timer</p>
-      </div>
-      <div class="icon-control">
-        <i class="fas fa-plus"></i>
-      </div>
-    </section>
-  </main>
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

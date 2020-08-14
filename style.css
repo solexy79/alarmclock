@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -10,31 +10,31 @@
   --clr-primary-1: rgb(22, 24, 27);
   --accent-clr-1: rgba(172, 0, 0, 1);
   --accent-clr-2: rgba(49, 154, 76, 1);
-  /* different shades of grey */
-  --dark-grey:rgba(89, 91, 93, 1);
+  /* different shades of grey for text */
+  --dark-grey: rgba(89, 91, 93, 1);
   --light-grey: rgba(155, 156, 157, 1);
   --very-light-grey: rgba(207, 209, 209, 1);
-  /* last i think shadow color */
-  --neu-shadow:  rgba(52, 54, 34, 1) ;
-  --ff-primary: "Roboto", sans-serif;
   --ff-secondary: "Montserrat", sans-serif;
-  --transition: all .5s linear;
+  --transition: all 0.5s linear;
   --radius: 0.5rem;
-  --dark-neu-shadow:
-  -4px -4px 12px 0 rgba(155, 156, 157, 0.1),
-    10px 10px 15px 0 rgba(0, 0, 0, 0.50);
+  --inset-shadow: inset 1px 1px 5px 0 rgba(0, 0, 0, 0.8),
+    inset -1px -1px 2px 0 var(--dark-grey);
+  --hand-shadow: -1px -1px 2px var(--very-light-grey),
+    1px 1px 5px rgba(0, 0, 0, 0.1);
+  --second-hand: 0 1px 5px 0 var(--accent-clr-1);
+  --dark-neu-shadow: -4px -4px 12px 0 rgba(155, 156, 157, 0.1),
+    10px 10px 15px 0 rgba(0, 0, 0, 0.5);
 }
 
-
-body{
+body {
   height: 100%;
   font-family: var(--ff-secondary);
 }
 
-main{
-  background:  var(--clr-primary-1);
+main {
+  background: var(--clr-primary-1);
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   position: relative;
 }
 
@@ -42,151 +42,156 @@ main{
 
 } */
 
-.header{
+.header {
   display: flex;
   align-items: center;
-  justify-content: space-around; 
+  justify-content: space-around;
   padding: 1rem;
 }
 
-.header a{
+.header a {
   color: #fff;
   font-weight: 700;
-  font-size:1.2rem;
+  font-size: 1.2rem;
 }
 
-
-/* digital clock */
-section.digital-clock{
+/* analog-clock style */
+section.analog-clock {
   width: 12rem;
   height: 12rem;
   background: var(--clr-primary-1);
   box-shadow: var(--dark-neu-shadow);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  border-bottom: var(--accent-clr-1);
   margin: 3rem auto;
   border-radius: 50%;
+  position: relative;
 }
 
-.date{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+.clock-hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  width: 0.5rem;
+  height: 40%;
+  background: var(--very-light-grey);
+  box-shadow: var(--hand-shadow);
+  border-radius: 8px 8px 0 0;
+  transform-origin: bottom;
+  z-index: 2;
+  transform: translateX(-50%) rotate(calc(var(--rotation) * 1deg));
+}
+
+.analog-clock::after {
+  content: " ";
+  position: absolute;
+  background: var(--clr-primary-1);
+  border: 2px solid var(--accent-clr-1);
+  z-index: 4;
+  height: 0.3rem;
+  width: 0.3rem;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.second {
+  --rotation: 30;
+  width: 0.1rem;
+  height: 45%;
+  background: var(--accent-clr-1);
+  box-shadow: var(--second-hand);
+  z-index: 3;
+}
+
+.minute {
+  width: 0.15rem;
+  height: 38%;
+}
+
+.hour {
+  width: 0.2rem;
+  height: 35%;
+}
+/* analog clock end */
+
+/* digital clock style */
+.digital-clock {
+  position: absolute;
+  bottom: 15%;
+  border-radius: var(--radius);
+  border: none;
+  box-shadow: var(--inset-shadow);
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.time {
+  font-size: 0.9rem;
+  font-weight: 700;
   color: var(--very-light-grey);
+  padding: 0.8rem;
 }
+/* digital clock end */
 
-.day{
-  font-size: .8rem;
-  padding: .5rem 0;
-  color: var(--light-grey);
-}
-
-.month{
-  font-size: .85rem;
-}
-
-.time{
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: var(--very-light-grey);
-}
-
-.alarm-prompt i {
-  color: var(--accent-clr-1);
-}
-
-.second{
-  font-size: 1rem;
-}
-
-section.alarms-section{
+section.alarms-section {
   padding: 1.5rem;
 }
 
-section.alarms-section label{
+section.alarms-section label {
   font-weight: 600;
   color: var(--very-light-grey);
 }
 
-.alarms{
+.alarms {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 0
+  padding: 1rem 0;
 }
 
-.alarms .alarm-time{
+.alarms .alarm-time {
   font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--dark-grey)
-}
-
-.add-alarm,
-.add-timer{
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  border-radius: var(--radius);
-  margin: 3rem 0;
-  padding: .8rem;
-  box-shadow: var(--dark-neu-shadow)
-}
-
-.add-alarm i,.add-timer i{
-  padding: 0 1rem;
-  font-size: .9rem;
-  color:var(--very-light-grey);
-}
-
-.add-alarm p,.add-timer p{
-  font-size: .8rem;
-  font-weight: 500;
-  color:var(--very-light-grey);
-}
-
-.icon-control{
-  margin: 1rem auto 0;
-  width: 3rem;
-  height: 3rem;
-  background: var(--clr-primary-1);
-  box-shadow: var(--dark-neu-shadow);
-  border-radius: var(--radius) ;
-  display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
-  text-align: center;
+  transition: var(--transition);
+  font-weight: 700;
 }
 
-.icon-control i{
-  padding: .5rem; 
-  font-size: .9rem;
+.alarms .alarm-time .desc {
+  font-size: 0.8rem;
+  font-weight: 500;
   color: var(--very-light-grey);
 }
 
+.alarms .alarm-time label {
+  color: var(--dark-grey);
+}
+
 /* toggle button */
-input[type = 'checkbox'].toggle-button{
+input[type="checkbox"].toggle-button {
   position: relative;
   appearance: none;
   -webkit-appearance: none;
-  -moz-appearance: none; 
+  -moz-appearance: none;
   width: 3.5rem;
   height: 1.875rem;
-  background: var(--clr-primary-1); 
+  background: var(--clr-primary-1);
   outline: none;
   border-radius: 20px;
-  box-shadow: inset 1px 1px 5px 0 rgba(0, 0, 0, .8), inset -1px -1px 2px 0 var(--dark-grey);
+  box-shadow: var(--inset-shadow);
   transition: var(--transition);
-
+  color: var(--light-grey);
 }
 input:checked[type="checkbox"].toggle-button {
   background: var(--clr-primary-1);
 }
 
-input[type="checkbox"].toggle-button::before{
-  content: '';
+input[type="checkbox"].toggle-button::before {
+  content: "";
   width: 1.5rem;
   height: 1.5rem;
   background-color: var(--accent-clr-1);
@@ -197,9 +202,131 @@ input[type="checkbox"].toggle-button::before{
   left: 3px;
   transition: var(--transition);
 }
-  
-input:checked[type="checkbox"].toggle-button::before{
-left: 28px;
-background-color: var(--accent-clr-2);
-box-shadow: 0 1px 5px 0 var(--accent-clr-2);
-} 
+
+input:checked[type="checkbox"].toggle-button::before {
+  left: 28px;
+  background-color: var(--accent-clr-2);
+  box-shadow: 0 1px 5px 0 var(--accent-clr-2);
+}
+
+.openModal {
+  margin: 1rem auto 0;
+  width: 3rem;
+  height: 3rem;
+  background: var(--clr-primary-1);
+  box-shadow: var(--dark-neu-shadow);
+  border: none;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.openModal i {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--very-light-grey);
+}
+
+.openModal:hover {
+  transform: scale(1.1);
+  transition: ease-in 300ms;
+}
+
+#modal {
+  display: none;
+  visibility: hidden;
+  position: fixed;
+  z-index: 4;
+  padding-top: 5rem;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(22, 24, 27, 0.904);
+  animation: fadein 1s;
+}
+
+@keyframes fadein {
+  from {
+    top: -50rem;
+    opacity: 0;
+  }
+  to {
+    top: 0rem;
+    opacity: 1;
+  }
+}
+.modalContent {
+  position: relative;
+  background-color: var(--clr-primary-1);
+  box-shadow: var(--dark-neu-shadow);
+  margin: 0 auto;
+  width: 90%;
+  max-width: 30rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: var(--radius);
+  animation-name: animateshow;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+}
+
+.modalContent label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  color: var(--light-grey);
+}
+
+.modalContent input {
+  padding: 0.5rem;
+  border: none;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  color: var(--light-grey);
+  background: var(--clr-primary-1);
+  box-shadow: var(--inset-shadow);
+}
+
+.modalContent .alarm-btn {
+  margin: 0.5rem;
+  border: none;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--dark-neu-shadow);
+  width: 6rem;
+  font-weight: 700;
+  color: var(--very-light-grey);
+  background: var(--clr-primary-1);
+  transition: var(--transition);
+}
+
+.modalContent .alarm-btn:hover {
+  transform: scale(1.05);
+}
+
+#closeModal {
+  color: var(--light-grey);
+  display: block;
+  position: absolute;
+  top: 1px;
+  right: 10px;
+  font-size: 3rem;
+  background: none;
+  border: none;
+}
+
+#closeModal:hover,
+#closeModal:focus {
+  color: hsl(0, 0%, 0%);
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
