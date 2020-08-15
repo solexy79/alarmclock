@@ -211,7 +211,7 @@ input:checked[type="checkbox"].toggle-button::before {
 
 .openModal {
   position: absolute;
-  bottom: 2%;
+  bottom: 5%;
   left: 50%;
   margin: 1rem 0;
   width: 3rem;
@@ -312,13 +312,16 @@ input:checked[type="checkbox"].toggle-button::before {
   letter-spacing: 0.1rem;
   border: none;
   padding: 0.5rem;
+  border: 2px solid var(--light-grey);
   border-radius: var(--radius);
-  box-shadow: var(--dark-neu-shadow);
-  width: 6rem;
+  width: 7.5rem;
   font-weight: 700;
+  font-size: 0.9rem;
   color: var(--very-light-grey);
-  background: var(--clr-primary-1);
+  background: transparent;
   transition: var(--transition);
+  cursor: pointer;
+  outline: none;
 }
 
 .modalContent .alarm-btn:hover {
