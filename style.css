@@ -148,7 +148,7 @@ section.alarms-section label {
 
 .alarms {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   padding: 1rem 0;
 }
