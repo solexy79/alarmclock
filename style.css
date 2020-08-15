@@ -173,6 +173,11 @@ section.alarms-section label {
   color: var(--dark-grey);
 }
 
+.alarms .alarm-time button {
+  background: none;
+  border: none;
+}
+
 .alarms .alarm-time i {
   color: var(--dark-grey);
   font-size: 0.8rem;
