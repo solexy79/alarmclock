@@ -38,7 +38,7 @@ var digitalClockController = (function() {
     } else {
       m = m;
     }
-    digitaltime.innerHTML = `${h} ${m}`;
+    digitaltime.innerHTML = `${h}${m}`;
   }
 })();
 
