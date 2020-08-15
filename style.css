@@ -137,6 +137,8 @@ section.analog-clock {
 
 section.alarms-section {
   padding: 1.5rem;
+  max-width: 40rem;
+  margin: 0 auto;
 }
 
 section.alarms-section label {
@@ -169,6 +171,12 @@ section.alarms-section label {
 
 .alarms .alarm-time label {
   color: var(--dark-grey);
+}
+
+.alarms .alarm-time i {
+  color: var(--dark-grey);
+  font-size: 0.8rem;
+  padding: 0.3rem;
 }
 
 /* toggle button */
