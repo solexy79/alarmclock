@@ -19,7 +19,7 @@
   --radius: 0.5rem;
   --inset-shadow: inset 1px 1px 5px 0 rgba(0, 0, 0, 0.8),
     inset -1px -1px 2px 0 var(--dark-grey);
-  --hand-shadow: -1px -1px 2px var(--very-light-grey),
+  --hand-shadow: -1px -1px 1px var(--very-light-grey),
     1px 1px 5px rgba(0, 0, 0, 0.1);
   --second-hand: 0 1px 5px 0 var(--accent-clr-1);
   --dark-neu-shadow: -4px -4px 12px 0 rgba(155, 156, 157, 0.1),
@@ -38,9 +38,10 @@ main {
   position: relative;
 }
 
-/* nav{
-
-} */
+nav {
+  max-width: 40rem;
+  margin: 0 auto;
+}
 
 .header {
   display: flex;
@@ -105,13 +106,13 @@ section.analog-clock {
 }
 
 .minute {
-  width: 0.15rem;
+  width: 0.1rem;
   height: 38%;
 }
 
 .hour {
-  width: 0.2rem;
-  height: 35%;
+  width: 0.1rem;
+  height: 30%;
 }
 /* analog clock end */
 

@@ -24,13 +24,14 @@
       <section class="analog-clock">
         <div class="clock-hand second" data-second-hand></div>
         <div class="clock-hand minute" data-minute-hand></div>
+        <div class="clock-hand hour" data-hour-hand></div>
         <div class="digital-clock">
           <span class="time" data-digital-clock>08:30</span>
         </div>
       </section>
 
       <section class="alarms-section">
-        <label for="">Alarms</label>
+        <label for="" class="alarm-container-label">Alarms</label>
         <div class="alarms">
           <div class="alarm-time">
             <label for="toggle-1">09:30</label>
@@ -39,18 +40,9 @@
               <span class="desc">Exercise</span>
             </div>
           </div>
-          <input type="checkbox" class="toggle-button" checked id="toggle-1" />
+          <input type="checkbox" class="toggle-button" checked />
         </div>
-        <div class="alarms">
-          <div class="alarm-time">
-            <label for="toggle-2">09:30</label>
-            <div class="alarm-desc">
-              <button><i class="fas fa-trash"></i></button>
-              <span class="desc">Exercise</span>
-            </div>
-          </div>
-          <input type="checkbox" class="toggle-button" id="toggle-2" />
-        </div>
+
         <button class="openModal" data-open-modal>
           <i class="fas fa-plus"></i>
         </button>
@@ -63,10 +55,15 @@
         <label for="description"
           >Write a <strong>brief</strong> description</label
         >
-        <input type="text" class="" id="description" maxlength="20" />
+        <input
+          type="text"
+          class="description"
+          id="description"
+          maxlength="20"
+        />
         <label for="set-alarm">Set Alarm</label>
         <input type="datetime-local" class="" id="set-alarm" />
-        <button class="alarm-btn">Alarm me!</button>
+        <button class="alarm-btn" id="alarm-btn">Alarm me</button>
       </div>
     </aside>
 
