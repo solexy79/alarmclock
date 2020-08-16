@@ -47,6 +47,7 @@ var digitalClockController = (function() {
 
 //ALarm clock controller
 var alarmClockController = (function() {
+  // Creating alarm constructor
   class Alarm {
     constructor(id, description, alarmtime) {
       this.id = id;
@@ -55,11 +56,13 @@ var alarmClockController = (function() {
     }
   }
 
+  // Creating alarm data structure to store alarms created
   var data = {
     allAlarms: []
   };
 
   return {
+    // Creating Public alarm object
     addAlarm: function(ID, des, alrmtim) {
       var newAlarm, ID;
 
@@ -70,21 +73,21 @@ var alarmClockController = (function() {
         ID = 0;
       }
 
-      //Create new Alarm
+      //Create new Alarm obj
       newAlarm = new Alarm(ID, des, alrmtim);
 
-      //Push it into ourb data structureas
+      //Push it into our data structureas
       data.allAlarms.push(newAlarm);
       return newAlarm;
     },
 
+    // SetAlarm function
     setAlarm: function(alarmtime) {
       if (isNaN(alarmtime)) {
         alert("Invalid Date");
         return;
       }
       var alarm = new Date(alarmtime);
-      console.log(alarm);
 
       var alarmTime = new Date(
         alarm.getUTCFullYear(),
@@ -100,7 +103,19 @@ var alarmClockController = (function() {
       return diff;
     },
 
-    testing: function() {}
+    // delete alarm function
+    deleteAlarm: function(id) {
+      var ids, index;
+      ids = data.allAlarms.map(item => {
+        return item.id;
+      });
+
+      index = ids.indexOf(id);
+
+      if (index !== -1) {
+        data.allAlarms.splice(index, 1);
+      }
+    }
   };
 })();
 
@@ -111,7 +126,6 @@ var UIController = (function() {
     inputDescription: "description",
     inputAlarmTime: "set-alarm",
     addAlarmBtn: "alarm-btn",
-    toggleBtn: "toggle-1",
     alarmContainer: ".alarm-container-label",
     openModalbtn: "[data-open-modal]",
     modal: "modal",
@@ -121,7 +135,8 @@ var UIController = (function() {
     alarmModal: "[data-alarm-modal]",
     alarmDescription: "[data-alarm-description]",
     snoozeBtn: "[data-snooze-btn]",
-    stopBtn: "[data-stop-btn]"
+    stopBtn: "[data-stop-btn]",
+    section: "[data-alarm-section]"
   };
 
   return {
@@ -142,11 +157,11 @@ var UIController = (function() {
       var html, newHtml, element;
       // Create html string with placeholder text
       element = DomStrings.alarmContainer;
-      html = `<div class="alarms id=alarm-%id%">
+      html = `<div class="alarms" id="alarm-%id%">
                 <div class="alarm-time">
                   <label>%alarmtime%</label>
                   <div class="alarm-desc">
-                    <button><i class="fas fa-trash"></i></button>
+                    <button data-alarm-del-btn><i class="fas fa-trash"></i></button>
                     <span class="desc">%description%</span>
                   </div>
                 </div>
@@ -160,6 +175,10 @@ var UIController = (function() {
 
       // Insert HTML to the DOM
       document.querySelector(element).insertAdjacentHTML("afterend", newHtml);
+    },
+    delAlarmList: function(selectorID) {
+      var el = document.getElementById(selectorID);
+      el.parentElement.removeChild(el);
     }
   };
 })();
@@ -167,6 +186,7 @@ var UIController = (function() {
 // **************
 // GLOBAL APP CONTROLLER
 var controller = (function(alarmClockCtrl, UICtrl) {
+  var alarmTimer;
   var DOM = UICtrl.getDOMstrings();
   var setupEventListeners = function() {
     var modal = document.getElementById(DOM.modal);
@@ -195,9 +215,14 @@ var controller = (function(alarmClockCtrl, UICtrl) {
     });
 
     document.querySelector(DOM.stopBtn).addEventListener("click", stopAlarm);
+
     document
       .querySelector(DOM.snoozeBtn)
       .addEventListener("click", snoozeAlarm);
+
+    document
+      .querySelector(DOM.section)
+      .addEventListener("click", ctrlDeleteAlarm);
   };
 
   var openModal = function() {
@@ -268,10 +293,29 @@ var controller = (function(alarmClockCtrl, UICtrl) {
       alert("time has already passed");
       return;
     }
-    setTimeout(initAlarm, diff);
+    alarmTimer = setTimeout(initAlarm, diff);
     // Add the alarm to the UI
     UICtrl.addAlarmList(newAlarm);
     closeModal();
+  };
+
+  var ctrlDeleteAlarm = function(e) {
+    var itemID, splitID, ID;
+    itemID =
+      e.target.parentElement.parentElement.parentElement.parentElement.id;
+    if (itemID) {
+      splitID = itemID.split("-");
+      ID = parseInt(splitID[1]);
+
+      // 1. delete the item from the data structure
+      alarmClockCtrl.deleteAlarm(ID);
+
+      // 2. delete the item from the UI
+      UICtrl.delAlarmList(itemID);
+
+      // 3. delete alarm
+      clearTimeout(alarmTimer);
+    }
   };
 
   return {
