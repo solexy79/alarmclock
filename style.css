@@ -238,7 +238,7 @@ input:checked[type="checkbox"].toggle-button::before {
 
 .openModal {
   position: absolute;
-  bottom: 5vh;
+  bottom: 8vh;
   left: 50%;
   margin: 1rem 0;
   width: 3rem;
