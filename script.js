@@ -249,17 +249,17 @@ var controller = (function(alarmClockCtrl, UICtrl) {
 
   var initAlarm = function() {
     var input;
-    var alarmSound = document.querySelector(DOM.alarmSound);
+    var timerSound = document.querySelector(DOM.timerSound);
     var alarmDescription = document.querySelector(DOM.alarmDescription);
 
     input = UICtrl.getInputs();
     alarmDescription.textContent = `${input.description} ${input.alarmTime}`;
     openAlarmModal();
-    alarmSound.play();
+    timerSound.play();
   };
   var stopAlarm = function() {
-    var alarmSound = document.querySelector(DOM.alarmSound);
-    alarmSound.pause();
+    var timerSound = document.querySelector(DOM.timerSound);
+    timerSound.pause();
     closeAlarmModal();
   };
   var snoozeAlarm = function() {
