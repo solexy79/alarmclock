@@ -4,6 +4,7 @@
   box-sizing: border-box;
   list-style: none;
   text-decoration: none;
+  font-family: inherit;
 }
 
 :root {
@@ -290,6 +291,7 @@ input:checked[type="checkbox"].toggle-button::before {
     opacity: 1;
   }
 }
+
 .modalContent {
   position: relative;
   background-color: var(--clr-primary-1);
@@ -371,4 +373,65 @@ input:checked[type="checkbox"].toggle-button::before {
   text-decoration: none;
   cursor: pointer;
   outline: none;
+}
+
+.alarm-modal {
+  display: none;
+  visibility: hidden;
+  position: fixed;
+  z-index: 4;
+  padding-top: 6rem;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(22, 24, 27, 0.904);
+  animation: fadein 1s;
+}
+
+.alarm-modalContent {
+  position: relative;
+  background-color: var(--clr-primary-1);
+  box-shadow: var(--dark-neu-shadow);
+  margin: 0 auto;
+  width: 90%;
+  max-width: 30rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: none;
+  border-radius: var(--radius);
+  animation-name: animateshow;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+}
+
+.alarm-modalContent p {
+  padding: 1rem 0 1.5rem;
+  font-size: 1.2rem;
+  color: var(--very-light-grey);
+}
+
+.alarm-modalContent button {
+  padding: 0.6rem 0.8rem;
+  margin-right: 1.5rem;
+  font-size: 0.8rem;
+  border-radius: var(--radius);
+  color: var(--very-light-grey);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: inherit;
+}
+
+.snooze-btn {
+  background: transparent;
+  border: 1px solid var(--very-light-grey);
+}
+
+.stop-btn {
+  background: var(--accent-clr-1);
+  border: none;
 }

@@ -10,6 +10,10 @@
       integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
       crossorigin="anonymous"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Alarm Clock</title>
   </head>
@@ -66,6 +70,19 @@
         <button class="alarm-btn" id="alarm-btn">Alarm me</button>
       </div>
     </aside>
+
+    <aside class="alarm-modal" data-alarm-modal>
+      <div class="alarm-modalContent">
+        <p class="set-description" data-alarm-description>your head is big</p>
+        <div class="alarm-btns">
+          <button class="snooze-btn" data-snooze-btn>Snooze</button>
+          <button class="stop-btn" data-stop-btn>Dismiss</button>
+        </div>
+      </div>
+    </aside>
+
+    <audio src="sounds/timer.mp3" data-timer-sound loop></audio>
+    <audio src="sounds/alarm.mp3" data-alarm-sound loop></audio>
 
     <script src="script.js"></script>
   </body>

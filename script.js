@@ -45,13 +45,6 @@ var digitalClockController = (function() {
   }
 })();
 
-//OPEN MODAL
-const openModalbtn = document.querySelector("[data-open-modal]");
-const modal = document.getElementById("modal");
-const btnCloseModal = document.querySelector("#closeModal");
-
-// MODAL END
-
 //ALarm clock controller
 var alarmClockController = (function() {
   class Alarm {
@@ -85,9 +78,29 @@ var alarmClockController = (function() {
       return newAlarm;
     },
 
-    testing: function() {
-      console.log(data);
-    }
+    setAlarm: function(alarmtime) {
+      if (isNaN(alarmtime)) {
+        alert("Invalid Date");
+        return;
+      }
+      var alarm = new Date(alarmtime);
+      console.log(alarm);
+
+      var alarmTime = new Date(
+        alarm.getUTCFullYear(),
+        alarm.getUTCMonth(),
+        alarm.getUTCDate(),
+        alarm.getUTCHours(),
+        alarm.getUTCMinutes(),
+        alarm.getUTCSeconds()
+      );
+
+      var diff = alarmTime.getTime() - new Date().getTime();
+
+      return diff;
+    },
+
+    testing: function() {}
   };
 })();
 
@@ -102,26 +115,27 @@ var UIController = (function() {
     alarmContainer: ".alarm-container-label",
     openModalbtn: "[data-open-modal]",
     modal: "modal",
-    closeModalBtn: "#closeModal"
+    closeModalBtn: "#closeModal",
+    timerSound: "[data-timer-sound]",
+    alarmSound: "[data-alarm-sound]",
+    alarmModal: "[data-alarm-modal]",
+    alarmDescription: "[data-alarm-description]",
+    snoozeBtn: "[data-snooze-btn]",
+    stopBtn: "[data-stop-btn]"
   };
 
   return {
     getDOMstrings: function() {
       return DomStrings;
     },
-    // openModal: function() {
-    //   return {
-    //     openModalbtn: document.querySelector(DomStrings.openModalbtn),
-    //     modal: document.getElementById(DomStrings.modal),
-    //     btnCloseModal: document.querySelector(DomStrings.closeModalBtn)
-    //   };
-    // },
     getInputs: function() {
       return {
         description: document.getElementById(DomStrings.inputDescription).value,
         alarmTime: document
           .getElementById(DomStrings.inputAlarmTime)
-          .value.slice(11)
+          .value.slice(11),
+        alarmInput: document.getElementById(DomStrings.inputAlarmTime)
+          .valueAsNumber
       };
     },
     addAlarmList: function(obj) {
@@ -136,7 +150,7 @@ var UIController = (function() {
                     <span class="desc">%description%</span>
                   </div>
                 </div>
-                <input type="checkbox" class="toggle-button"/>
+                <input type="checkbox" class="toggle-button" checked/>
               </div>`;
 
       // Replace the placeholder text with some actual data
@@ -153,9 +167,10 @@ var UIController = (function() {
 // **************
 // GLOBAL APP CONTROLLER
 var controller = (function(alarmClockCtrl, UICtrl) {
+  var DOM = UICtrl.getDOMstrings();
   var setupEventListeners = function() {
-    var DOM = UICtrl.getDOMstrings();
     var modal = document.getElementById(DOM.modal);
+
     document
       .querySelector(DOM.openModalbtn)
       .addEventListener("click", openModal);
@@ -178,15 +193,53 @@ var controller = (function(alarmClockCtrl, UICtrl) {
         ctrlAddAlarm();
       }
     });
+
+    document.querySelector(DOM.stopBtn).addEventListener("click", stopAlarm);
+    document
+      .querySelector(DOM.snoozeBtn)
+      .addEventListener("click", snoozeAlarm);
   };
 
   var openModal = function() {
     modal.style.display = "block";
     modal.style.visibility = "visible";
   };
+
   var closeModal = function() {
     modal.style.display = "none";
     modal.style.visibility = "hidden";
+  };
+
+  var openAlarmModal = function() {
+    var alarmModal = document.querySelector(DOM.alarmModal);
+    alarmModal.style.display = "block";
+    alarmModal.style.visibility = "visible";
+  };
+
+  var closeAlarmModal = function() {
+    var alarmModal = document.querySelector(DOM.alarmModal);
+    alarmModal.style.display = "none";
+    alarmModal.style.visibility = "hidden";
+  };
+
+  var initAlarm = function() {
+    var input;
+    var alarmSound = document.querySelector(DOM.alarmSound);
+    var alarmDescription = document.querySelector(DOM.alarmDescription);
+
+    input = UICtrl.getInputs();
+    alarmDescription.textContent = `${input.description} ${input.alarmTime}`;
+    openAlarmModal();
+    alarmSound.play();
+  };
+  var stopAlarm = function() {
+    var alarmSound = document.querySelector(DOM.alarmSound);
+    alarmSound.pause();
+    closeAlarmModal();
+  };
+  var snoozeAlarm = function() {
+    stopAlarm();
+    setTimeout(initAlarm, 120000);
   };
 
   var ctrlAddAlarm = function() {
@@ -201,7 +254,6 @@ var controller = (function(alarmClockCtrl, UICtrl) {
     if (input.description === "") {
       input.description = " ";
     }
-    console.log(input);
 
     // Add the alarm to the alarm controller
     newAlarm = alarmClockCtrl.addAlarm(
@@ -210,6 +262,13 @@ var controller = (function(alarmClockCtrl, UICtrl) {
       input.alarmTime
     );
 
+    // Sound alarm
+    var diff = alarmClockCtrl.setAlarm(input.alarmInput);
+    if (diff < 0) {
+      alert("time has already passed");
+      return;
+    }
+    setTimeout(initAlarm, diff);
     // Add the alarm to the UI
     UICtrl.addAlarmList(newAlarm);
     closeModal();
