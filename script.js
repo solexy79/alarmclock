@@ -50,22 +50,6 @@ const openModalbtn = document.querySelector("[data-open-modal]");
 const modal = document.getElementById("modal");
 const btnCloseModal = document.querySelector("#closeModal");
 
-openModalbtn.addEventListener("click", () => {
-  modal.style.display = "block";
-  modal.style.visibility = "visible";
-});
-
-btnCloseModal.addEventListener("click", () => {
-  modal.style.display = "none";
-  modal.style.visibility = "visible";
-});
-
-window.addEventListener("click", e => {
-  if (e.target == modal) {
-    modal.style.display = "none";
-    modal.style.visibility = "visible";
-  }
-});
 // MODAL END
 
 //ALarm clock controller
@@ -115,13 +99,23 @@ var UIController = (function() {
     inputAlarmTime: "set-alarm",
     addAlarmBtn: "alarm-btn",
     toggleBtn: "toggle-1",
-    alarmContainer: ".alarm-container-label"
+    alarmContainer: ".alarm-container-label",
+    openModalbtn: "[data-open-modal]",
+    modal: "modal",
+    closeModalBtn: "#closeModal"
   };
 
   return {
     getDOMstrings: function() {
       return DomStrings;
     },
+    // openModal: function() {
+    //   return {
+    //     openModalbtn: document.querySelector(DomStrings.openModalbtn),
+    //     modal: document.getElementById(DomStrings.modal),
+    //     btnCloseModal: document.querySelector(DomStrings.closeModalBtn)
+    //   };
+    // },
     getInputs: function() {
       return {
         description: document.getElementById(DomStrings.inputDescription).value,
@@ -161,6 +155,21 @@ var UIController = (function() {
 var controller = (function(alarmClockCtrl, UICtrl) {
   var setupEventListeners = function() {
     var DOM = UICtrl.getDOMstrings();
+    var modal = document.getElementById(DOM.modal);
+    document
+      .querySelector(DOM.openModalbtn)
+      .addEventListener("click", openModal);
+
+    document
+      .querySelector(DOM.closeModalBtn)
+      .addEventListener("click", closeModal);
+
+    window.addEventListener("click", e => {
+      if (e.target == modal) {
+        closeModal();
+      }
+    });
+
     document
       .getElementById(DOM.addAlarmBtn)
       .addEventListener("click", ctrlAddAlarm);
@@ -169,6 +178,15 @@ var controller = (function(alarmClockCtrl, UICtrl) {
         ctrlAddAlarm();
       }
     });
+  };
+
+  var openModal = function() {
+    modal.style.display = "block";
+    modal.style.visibility = "visible";
+  };
+  var closeModal = function() {
+    modal.style.display = "none";
+    modal.style.visibility = "hidden";
   };
 
   var ctrlAddAlarm = function() {
@@ -194,6 +212,7 @@ var controller = (function(alarmClockCtrl, UICtrl) {
 
     // Add the alarm to the UI
     UICtrl.addAlarmList(newAlarm);
+    closeModal();
   };
 
   return {
